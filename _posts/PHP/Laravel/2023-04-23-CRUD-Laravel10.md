@@ -153,44 +153,43 @@ public function destroy(string $id)
 
 Visualização principal da página de listagem de objetos. Ele exibe uma tabela com informações dos objetos e botões de ***create***, ***edit*** e ***delete*** para os objetos.
 
-```
+```php
 @extends('layout')
 
 @section('content')
-		...
-    <a href="{{ route('objetos.create') }}" class="btn btn-info">Create</a>
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th>Coluna</th>
-								...
-                <th>Editar</th>
-                <th>Remover</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($objetos as $objeto)
-                <tr>
-                    <td>
-	                    <a href="{{ route('objetos.show', ['objeto' => $objeto->id]) }}" class="p-2 rounded text-decoration-none bg-white text-black">{{ $objeto->nome }}</a>
-                    </td>
-										...
-                    <td>
-											<a href="{{ route('objetos.edit', ['objeto' => $objeto->id]) }}" class="btn btn-success">Editar</a>
-										</td>
-										<td>
-                        <form action="{{ route('objetos.destroy', ['objeto' => $objeto->id]) }}" method="POST"
-                            style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-		...
+  ...
+  <a href="{{ '{' }}{ route('objetos.create') }}" class="btn btn-info">Create</a>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Coluna</th>
+        ...
+        <th>Editar</th>
+        <th>Remover</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($objetos as $objeto)
+        <tr>
+          <td>
+            <a href="{{ '{' }}{ route('objetos.show', ['objeto' => $objeto->id]) }}" class="p-2 rounded text-decoration-none bg-white text-black">{{ '{' }}{ $objeto->nome }}</a>
+          </td>
+          ...
+          <td>
+            <a href="{{ '{' }}{ route('objetos.edit', ['objeto' => $objeto->id]) }}" class="btn btn-success">Editar</a>
+          </td>
+          <td>
+            <form action="{{ '{' }}{ route('objetos.destroy', ['objeto' => $objeto->id]) }}" method="POST" style="display:inline">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+  ...
 @endsection
 ```
 
@@ -198,23 +197,23 @@ Visualização principal da página de listagem de objetos. Ele exibe uma tabela
 
 Visualização da página de criação de objetos. Contém um formulário onde o usuário pode inserir informações sobre o novo objeto. O formulário envia as informações inseridas para a rota de ***create***.
 
-```
+```php
 @extends('layout')
 
 @section('content')
-		// Mostra se houver alguma flash message
-    @if (session()->has('success'))
-        <span class="alert alert-success">{{ session()->get('success') }}</span>
-    @elseif(session()->has('fail'))
-        <span class="alert alert-danger">{{ session()->get('fail') }}</span>
-    @endif
+  // Mostra se houver alguma flash message 
+  @if (session()->has('success'))
+    <span class="alert alert-success">{{ '{' }}{ session()->get('success') }}</span>
+  @elseif(session()->has('fail'))
+    <span class="alert alert-danger">{{ '{' }}{ session()->get('fail') }}</span>
+  @endif
 
-    <form action="{{ route('objetos.store', ['objeto' => $objeto->id]) }}" method="POST">
-        @csrf
-        <input type="text" class="form-control" name="nome" value="{{ $objeto->nome }}">
-				...
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
+  <form action="{{ '{' }}{ route('objetos.store', ['objeto' => $objeto->id]) }}" method="POST">
+    @csrf
+    <input type="text" class="form-control" name="nome" value="{{ '{' }}{ $objeto->nome }}">
+    // Outros campos do formulário 
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
 @endsection
 ```
 
@@ -222,24 +221,24 @@ Visualização da página de criação de objetos. Contém um formulário onde o
 
 Visualização da página de exibição de um objeto específico. Ele exibe as informações do objeto em um formato mais detalhado do que a tabela na página de listagem de objetos.
 
-```
-@extends('layout');
+```php
+@extends('layout')
 
 @section('content')
-    <h1>{{ $objeto->nome }}</h1>
-		
-		@foreach ($objetos as $objeto)
-      <ul>
-        <li>Nome: { $objeto->nome }}</li>
-				...
-			</ul>
-    @endforeach
+  <h1>{{ '{' }}{ $objeto->nome }}</h1>
 
-    <form action="{{ route('objetos.destroy', ['objeto' => $objeto->id]) }}" method='POST'>
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">Delete
-    </form>
+  @foreach ($objetos as $objeto)
+    <ul>
+      <li>Nome: {{ '{' }}{ $objeto->nome }}</li>
+      // Outros campos do objeto
+    </ul>
+  @endforeach
+
+  <form action="{{ '{' }}{ route('objetos.destroy', ['objeto' => $objeto->id]) }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
 @endsection
 ```
 
@@ -247,24 +246,24 @@ Visualização da página de exibição de um objeto específico. Ele exibe as i
 
 Visualização da página de edição de um objeto. Ele contém um formulário que permite ao usuário editar as informações do objeto existente. O formulário envia as informações atualizadas para a rota de atualização do objeto.
 
-```
+```php
 @extends('layout')
 
 @section('content')
-		// Mostra se houver alguma flash message
-    @if (session()->has('success'))
-        <span class="alert alert-success">{{ session()->get('success') }}</span>
-    @elseif(session()->has('fail'))
-        <span class="alert alert-danger">{{ session()->get('fail') }}</span>
-    @endif
+  // Mostra se houver alguma flash message
+  @if (session()->has('success'))
+    <span class="alert alert-success">{{ '{' }}{ session()->get('success') }}</span>
+  @elseif(session()->has('fail'))
+    <span class="alert alert-danger">{{ '{'}}{ session()->get('fail') }}</span>
+  @endif
 
-    <form action="{{ route('objetos.update', ['objeto' => $objeto->id]) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <input type="text" class="form-control" name="nome" value="{{ $objeto->nome }}">
-				...
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
+  <form action="{{ '{' }}{ route('objetos.update', ['objeto' => $objeto->id]) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <input type="text" class="form-control" name="nome" value="{{ '{' }}{ $objeto->nome }}">
+    // ...
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
 @endsection
 ```
 ---
